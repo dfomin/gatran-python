@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from typing import Dict, List
 
 from action import Action
-from state import State
+
+from gatran.state import State
 
 
 @dataclass

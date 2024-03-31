@@ -1,5 +1,8 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+from typing import List, Tuple
 
 
 class Action(ABC):
-    pass
+    @abstractmethod
+    def apply(self, state: 'State') -> List[Tuple['State', float]]:
+        raise NotImplementedError
