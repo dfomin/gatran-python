@@ -1,7 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from examples.tictactoe.tictactoe_action import TicTacToeAction
 from gatran.action import Action
 from gatran.state import State
 

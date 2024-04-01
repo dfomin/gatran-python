@@ -21,10 +21,7 @@ class State(ABC):
         return self.rewards is not None
 
     def apply_action(self, action: Action) -> List[Tuple['State', float]]:
-        possible_states = action.apply(self.clone())
-        for possible_state in possible_states:
-            possible_state[0].check_game_over()
-        return possible_states
+        return action.apply(self.clone())
 
     @abstractmethod
     def unique_id(self) -> str:
