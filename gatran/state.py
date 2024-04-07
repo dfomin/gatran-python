@@ -8,7 +8,7 @@ from gatran.action import Action
 @dataclass
 class State(ABC):
     current_player_index: int = 0
-    rewards: Optional[List[int]] = None
+    rewards: Optional[List[float]] = None
 
     def __eq__(self, other) -> bool:
         return self.unique_id() == other.unique_id

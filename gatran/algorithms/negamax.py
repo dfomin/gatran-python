@@ -13,7 +13,7 @@ class NegamaxAgent(Agent):
 
     def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
         node = Node(state, [], {})
-        _, action = self.negamax(node, 10, 0)
+        _, action = self.negamax(node, 2, 0)
         return action
 
     def negamax(self, node: Node, max_depth: int, current_depth: int) -> Tuple[float, Optional[Action]]:
