@@ -30,7 +30,7 @@ class ChessState(State):
         return None
 
     def unique_id(self) -> str:
-        return str(self.board)
+        return self.board.fen()
 
     def possible_actions(self) -> List[Action]:
         return [ChessAction(move) for move in self.board.legal_moves]

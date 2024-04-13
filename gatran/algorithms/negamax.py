@@ -14,10 +14,13 @@ class NegamaxAgent(Agent):
 
     def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
         node = Node(state, [], {})
-        _, action = self.negamax(node, self.max_depth, 0)
+        value, action = self.negamax(node, self.max_depth, 0, -math.inf, math.inf)
+        print(value)
         return action
 
-    def negamax(self, node: Node, max_depth: int, current_depth: int) -> Tuple[float, Optional[Action]]:
+    def negamax(
+        self, node: Node, max_depth: int, current_depth: int, alpha: float, beta: float
+    ) -> Tuple[float, Optional[Action]]:
         if node.state.is_finished or max_depth == current_depth:
             return self.evaluator.value(node), None
 
@@ -31,11 +34,22 @@ class NegamaxAgent(Agent):
                 next_score, next_move = self.negamax(
                     node.transposition_table[next_state.unique_id()],
                     max_depth,
-                    current_depth + 1)
-                if next_state.current_player_index() != node.state.current_player_index():
+                    current_depth + 1,
+                    -beta,
+                    -max(alpha, max_score),
+                )
+                current_player = node.state.current_player_index()
+                next_player = next_state.current_player_index()
+                if current_player != next_player:
                     next_score = -next_score
+
                 current_score += next_score * prob
+
             if current_score > max_score:
                 max_score = current_score
                 best_action = action
+                alpha = max(alpha, max_score)
+
+            if max_score >= beta:
+                break
         return max_score, best_action
