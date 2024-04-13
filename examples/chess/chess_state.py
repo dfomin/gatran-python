@@ -20,11 +20,13 @@ class ChessState(State):
         return int(self.board.turn == chess.BLACK)
 
     def rewards(self) -> Optional[List[float]]:
-        if self.board.is_game_over():
-            if self.board.is_checkmate():
-                return [float(self.board.turn != chess.WHITE), float(self.board.turn != chess.BLACK)]
-            else:
+        if self.board.outcome():
+            if self.board.outcome().winner is None:
                 return [0.5, 0.5]
+            elif self.board.outcome().winner:
+                return [1.0, 0.0]
+            else:
+                return [0.0, 1.0]
         return None
 
     def unique_id(self) -> str:

@@ -14,11 +14,4 @@ class ChessAction(Action):
 
     def apply(self, state: 'ChessState') -> List[Tuple['ChessState', float]]:
         state.board.push(self.move)
-        if state.board.outcome():
-            if state.board.outcome().winner is None:
-                state._rewards = [0.5, 0.5]
-            elif state.board.outcome().winner:
-                state._rewards = [1, 0]
-            else:
-                state._rewards = [0, 1]
         return [(state, 1.0)]

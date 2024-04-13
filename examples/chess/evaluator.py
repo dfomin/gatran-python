@@ -29,6 +29,12 @@ def calculate_material(board: chess.Board) -> Tuple[float, float]:
 class ChessEvaluator(Evaluator):
     def value(self, node: Node) -> float:
         if isinstance(node.state, ChessState):
+            rewards = node.state.rewards()
+            if rewards is not None:
+                player = node.state.current_player_index()
+                opponent = 1 - node.state.current_player_index()
+                return rewards[player] * 1000 - rewards[opponent] * 1000
+
             white, black = calculate_material(node.state.board)
             if node.state.current_player_index() == 0:
                 return white - black
