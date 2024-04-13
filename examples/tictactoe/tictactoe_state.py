@@ -1,5 +1,5 @@
 from dataclasses import dataclass, replace
-from typing import List
+from typing import List, Optional
 
 from examples.tictactoe.tictactoe_action import TicTacToeAction
 from gatran.action import Action
@@ -20,6 +20,8 @@ LINES = [
 
 @dataclass
 class TicTacToeState(State):
+    _current_player_index: int = 0
+    _rewards: Optional[List[float]] = None
     field: int = 0
 
     def __str__(self) -> str:
@@ -41,6 +43,12 @@ class TicTacToeState(State):
                 result += "\n"
         return result
 
+    def current_player_index(self) -> int:
+        return self._current_player_index
+
+    def rewards(self) -> Optional[List[float]]:
+        return self._rewards
+
     def unique_id(self) -> str:
         return str(self.field)
 
@@ -52,13 +60,13 @@ class TicTacToeState(State):
     def check_game_over(self):
         for line in LINES:
             if all([0b11 & self.field >> (2 * i) == 1 for i in line]):
-                self.rewards = [1, 0]
+                self._rewards = [1, 0]
                 return
             elif all([0b11 & self.field >> (2 * i) == 2 for i in line]):
-                self.rewards = [0, 1]
+                self._rewards = [0, 1]
                 return
             elif all([0b11 & self.field >> (2 * i) != 0 for i in range(9)]):
-                self.rewards = [0, 0]
+                self._rewards = [0, 0]
                 return
 
     def clone(self) -> 'State':

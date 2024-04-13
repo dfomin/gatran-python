@@ -8,12 +8,13 @@ from gatran.tree.node import Node, Evaluator
 
 
 class NegamaxAgent(Agent):
-    def __init__(self, evaluator: Evaluator):
+    def __init__(self, evaluator: Evaluator, max_depth: int):
         self.evaluator = evaluator
+        self.max_depth = max_depth
 
     def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
         node = Node(state, [], {})
-        _, action = self.negamax(node, 3, 0)
+        _, action = self.negamax(node, self.max_depth, 0)
         return action
 
     def negamax(self, node: Node, max_depth: int, current_depth: int) -> Tuple[float, Optional[Action]]:
@@ -31,7 +32,7 @@ class NegamaxAgent(Agent):
                     node.transposition_table[next_state.unique_id()],
                     max_depth,
                     current_depth + 1)
-                if next_state.current_player_index != node.state.current_player_index:
+                if next_state.current_player_index() != node.state.current_player_index():
                     next_score = -next_score
                 current_score += next_score * prob
             if current_score > max_score:

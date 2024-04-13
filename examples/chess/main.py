@@ -6,7 +6,7 @@ from gatran.game import Game
 
 
 def main():
-    game = Game(ChessState(), [CLIAgent(), NegamaxAgent(ChessEvaluator())])
+    game = Game(ChessState(), [CLIAgent(), NegamaxAgent(ChessEvaluator(), 3)])
     game.play()
 
 

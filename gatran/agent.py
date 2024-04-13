@@ -17,7 +17,7 @@ class Agent(ABC):
 class CLIAgent(Agent):
     def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
         print(f"{state}")
-        print(f"Player {state.current_player_index} plays")
+        print(f"Player {state.current_player_index()} plays")
         print("Actions:")
         for i, action in enumerate(possible_actions):
             print(f"{i}. {action}")

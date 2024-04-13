@@ -6,7 +6,7 @@ from gatran.game import Game
 
 
 def main():
-    game = Game(TicTacToeState(), [CLIAgent(), NegamaxAgent(TicTacToeEvaluator())])
+    game = Game(TicTacToeState(), [CLIAgent(), NegamaxAgent(TicTacToeEvaluator(), 10)])
     game.play()
 
 

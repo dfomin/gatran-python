@@ -14,12 +14,11 @@ class ChessAction(Action):
 
     def apply(self, state: 'ChessState') -> List[Tuple['ChessState', float]]:
         state.board.push(self.move)
-        state.current_player_index = 1 - state.current_player_index
         if state.board.outcome():
             if state.board.outcome().winner is None:
-                state.rewards = [0.5, 0.5]
+                state._rewards = [0.5, 0.5]
             elif state.board.outcome().winner:
-                state.rewards = [1, 0]
+                state._rewards = [1, 0]
             else:
-                state.rewards = [0, 1]
+                state._rewards = [0, 1]
         return [(state, 1.0)]

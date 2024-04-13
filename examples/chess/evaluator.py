@@ -30,7 +30,7 @@ class ChessEvaluator(Evaluator):
     def value(self, node: Node) -> float:
         if isinstance(node.state, ChessState):
             white, black = calculate_material(node.state.board)
-            if node.state.current_player_index == 0:
+            if node.state.current_player_index() == 0:
                 return white - black
             else:
                 return black - white

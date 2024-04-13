@@ -12,8 +12,8 @@ class TicTacToeAction(Action):
         return f"pos={self.pos}"
 
     def apply(self, state: 'TicTacToeState') -> List[Tuple['TicTacToeState', float]]:
-        state.field |= 1 << (self.pos * 2 + state.current_player_index)
+        state.field |= 1 << (self.pos * 2 + state.current_player_index())
         state.check_game_over()
         if not state.is_finished:
-            state.current_player_index = 1 - state.current_player_index
+            state._current_player_index = 1 - state.current_player_index()
         return [(state, 1)]
