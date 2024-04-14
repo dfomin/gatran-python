@@ -7,7 +7,7 @@ from gatran.state import State
 
 class Agent(ABC):
     @abstractmethod
-    def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
+    def choose_action(self, state: State) -> Action:
         raise NotImplementedError
 
     def on_action_applied(self, action: Action, new_state: State):
@@ -15,7 +15,8 @@ class Agent(ABC):
 
 
 class CLIAgent(Agent):
-    def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
+    def choose_action(self, state: State) -> Action:
+        possible_actions = state.possible_actions()
         print(f"{state}")
         print(f"Player {state.current_player_index()} plays")
         print("Actions:")
@@ -26,7 +27,8 @@ class CLIAgent(Agent):
 
 
 class CLIAgentInputAction(Agent):
-    def choose_action(self, state: State, possible_actions: List[Action]) -> Action:
+    def choose_action(self, state: State) -> Action:
+        possible_actions = state.possible_actions()
         print(f"{state}")
         print(f"Player {state.current_player_index()} plays")
         while True:

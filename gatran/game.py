@@ -13,7 +13,7 @@ class Game:
     def play(self):
         while not self.state.is_finished:
             agent = self.agents[self.state.current_player_index()]
-            action = agent.choose_action(self.state, self.state.possible_actions())
+            action = agent.choose_action(self.state)
             possible_states = self.state.apply_action(action)
             next_state = random.choices([ps[0] for ps in possible_states], weights=[ps[1] for ps in possible_states])[0]
             self.state = next_state
