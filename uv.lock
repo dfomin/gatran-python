@@ -1,0 +1,19 @@
+version = 1
+requires-python = ">=3.12"
+
+[[package]]
+name = "chess"
+version = "1.11.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/74/16/53b895bb4fccede8e506de820fa94db03a2dc8bd2ca4bec0aac4a112fb65/chess-1.11.1.tar.gz", hash = "sha256:b7f66a32dc599ab260e2b688e6ac4e868dad840377a54b61357e2dec2a5fed00", size = 156529 }
+
+[[package]]
+name = "gatran-python"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "chess" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "chess", specifier = ">=1.11.1" }]
