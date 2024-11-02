@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional, Tuple
 
 from gatran.action import Action
 
@@ -14,22 +13,22 @@ class State(ABC):
     def current_player_index(self) -> int:
         raise NotImplementedError
 
-    def rewards(self) -> Optional[List[float]]:
+    def rewards(self) -> list[float] | None:
         raise NotImplementedError
 
     @property
     def is_finished(self):
         return self.rewards() is not None
 
-    def apply_action(self, action: Action) -> List[Tuple['State', float]]:
-        return action.apply(self.clone())
+    def apply_action(self, action: Action) -> list[tuple['State', float]]:
+        raise NotImplementedError
 
     @abstractmethod
     def unique_id(self) -> str:
         raise NotImplementedError
 
     @abstractmethod
-    def possible_actions(self) -> List[Action]:
+    def possible_actions(self) -> list[Action]:
         raise NotImplementedError
 
     @abstractmethod

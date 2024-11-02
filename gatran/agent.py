@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List
 
 from gatran.action import Action
 from gatran.state import State

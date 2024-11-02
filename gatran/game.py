@@ -1,12 +1,11 @@
 import random
-from typing import List
 
 from gatran.agent import Agent
 from gatran.state import State
 
 
 class Game:
-    def __init__(self, state: State, agents: List[Agent]):
+    def __init__(self, state: State, agents: list[Agent]):
         self.state = state
         self.agents = agents
 

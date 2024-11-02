@@ -1,5 +1,3 @@
-from typing import Tuple, Dict
-
 import chess
 
 from examples.chess.chess_state import ChessState
@@ -15,7 +13,7 @@ PIECE_VALUES = {
 }
 
 
-def calculate_material(board: chess.Board) -> Tuple[float, float]:
+def calculate_material(board: chess.Board) -> tuple[float, float]:
     white_score = 0
     black_score = 0
 

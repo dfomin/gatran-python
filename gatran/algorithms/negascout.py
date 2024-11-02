@@ -1,5 +1,4 @@
 import math
-from typing import Tuple, Optional, List
 
 from gatran.action import Action
 from gatran.agent import Agent
@@ -20,7 +19,7 @@ class NegascoutAgent(Agent):
 
     def negascout(
         self, node: Node, max_depth: int, current_depth: int, alpha: float, beta: float
-    ) -> Tuple[float, Optional[Action]]:
+    ) -> tuple[float, Action | None]:
         if node.state.is_finished or max_depth == current_depth:
             return self.evaluator.value(node), None
 

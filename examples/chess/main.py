@@ -1,6 +1,6 @@
 from examples.chess.chess_state import ChessState
 from examples.chess.evaluator import ChessEvaluator
-from gatran.agent import CLIAgent, CLIAgentInputAction
+from gatran.agent import CLIAgentInputAction
 from gatran.algorithms.negascout import NegascoutAgent
 from gatran.game import Game
 

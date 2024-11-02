@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from typing import List, Optional
 
 import chess
 from chess import Board
@@ -19,7 +18,7 @@ class ChessState(State):
     def current_player_index(self) -> int:
         return int(self.board.turn == chess.BLACK)
 
-    def rewards(self) -> Optional[List[float]]:
+    def rewards(self) -> list[float] | None:
         if self.board.outcome():
             if self.board.outcome().winner is None:
                 return [0.5, 0.5]
@@ -32,8 +31,13 @@ class ChessState(State):
     def unique_id(self) -> str:
         return self.board.fen()
 
-    def possible_actions(self) -> List[Action]:
+    def possible_actions(self) -> list[Action]:
         return [ChessAction(move) for move in self.board.legal_moves]
+
+    def apply_action(self, action: ChessAction) -> list[tuple['State', float]]:
+        state = self.clone()
+        state.board.push(action.move)
+        return [(state, 1.0)]
 
     def clone(self) -> 'State':
         return ChessState(self.board.copy())
